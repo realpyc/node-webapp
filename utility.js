@@ -1,8 +1,8 @@
 //utility.js
 
 const request = require("request-promise");
-const EXTERNAL_API=""; // put url
-const accessToken=""; // put access token
+const EXTERNAL_API="https://tools.ecpe.nu.ac.th/network/api/student/"; // put url
+const accessToken="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90b29scy5lY3BlLm51LmFjLnRoXC9uZXR3b3JrXC9hcGlcL2xvZ2luIiwiaWF0IjoxNjU5MTk1MDgyLCJleHAiOjE2NTkxOTg2ODIsIm5iZiI6MTY1OTE5NTA4MiwianRpIjoiSWJhVE1LVk9UczlWWlhPbyIsInN1YiI6MzgsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.En5Z0hBwMtUgXnQPD4BtmutljSw_7Vp_ibFdTZAfZ6c"; // put access token
 const student = {
   name: '', // replace with your full name.
   age: 19, // put your age.
@@ -12,33 +12,29 @@ const student = {
 
 
 exports.findStudentbyId = function (student_id, cb) {
-  //-- call external api 
-          request({
-            method: "POST",
-            uri: EXTERNAL_API,
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            },
-            formData: {
-                message: `HTTP Request :${data.student_id} `,
-                student_id: student_id
-            }
-        }).then((response) => {
-            console.log('Sent');
-            console.log({
-                "request": student_id,
-                "response": response
-            });
-
-           cb(response);
-
-        }).catch((err) => {
-            console.log('Error:', err.message);
-            console.log({
-                "Error": err.message
-            });
-        });
-}
+    //-- call external api 
+            request({
+              method: "GET",
+              uri: EXTERNAL_API+student_id,
+              headers: {
+                  Authorization: `Bearer ${accessToken}`
+              }
+          }).then((response) => {
+              console.log('Sent');
+              console.log({
+                  "request": student_id,
+                  "response": response
+              });
+  
+             cb(response);
+  
+          }).catch((err) => {
+              console.log('Error:', err.message);
+              console.log({
+                  "Error": err.message
+              });
+          });
+  }
 
 exports.fakeStudentbyInfo = function (student_id, cb) {
 
